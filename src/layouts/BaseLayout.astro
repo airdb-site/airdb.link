@@ -22,6 +22,7 @@ const {
   copyrightLabel = "",
   filingLabel = "",
   filingUrl = "https://beian.miit.gov.cn/",
+  homeMode = false,
 } = Astro.props as {
   title: string;
   description?: string;
@@ -37,6 +38,7 @@ const {
   copyrightLabel?: string;
   filingLabel?: string;
   filingUrl?: string;
+  homeMode?: boolean;
 };
 
 function isActive(url?: string) {
@@ -64,16 +66,16 @@ function isActive(url?: string) {
       <div class="shell">
         <div class="header-bar">
           <a class="brand" href={homePath}>
-            <span class="brand-mark">airdb</span>
+            <span class="brand-mark">airdb{homeMode && <em>.link</em>}</span>
           </a>
           <nav class="top-nav" aria-label="Global">
-            {globalNav.map((item) => (
+            {(homeMode ? [{name: htmlLang === "zh-CN" ? "链接目录" : "Directory", url: "#directory"}, {name: htmlLang === "zh-CN" ? "版本路由" : "Version routes", url: "#resolver"}, {name: htmlLang === "zh-CN" ? "审计记录" : "Audit log", url: "#audit"}, {name: htmlLang === "zh-CN" ? "文档" : "Docs", url: "/zh/documentation/"}] : globalNav).map((item) => (
               <a class:list={[isActive(item.url) && "active"]} href={item.url}>
                 {item.name}
               </a>
             ))}
           </nav>
-          {languageOptions.length > 0 && (
+          {homeMode ? <a class="console-link" href="#resolver">{htmlLang === "zh-CN" ? "控制台" : "Console"} →</a> : languageOptions.length > 0 && (
             <div class="language-switch" aria-label="Language switcher">
               {languageOptions.map((item, index) => (
                 <>
@@ -89,7 +91,7 @@ function isActive(url?: string) {
       </div>
     </header>
 
-    <main class:list={["shell", sidebarNav.length > 0 && "with-sidebar"]}>
+    <main class:list={["shell", homeMode && "product-main", sidebarNav.length > 0 && "with-sidebar"]}>
       {sidebarNav.length > 0 && (
         <aside class="sidebar">
           <div class="sidebar-panel">
@@ -110,7 +112,7 @@ function isActive(url?: string) {
       </div>
     </main>
 
-    <footer class="site-footer">
+    {homeMode ? <footer class="product-footer"><div class="shell"><div><strong>airdb.link</strong><small>© 2026 airdb.link</small></div><nav><a href="#directory">Product</a><a href="/zh/documentation/">Docs</a><a href="https://github.com/airdb" target="_blank">GitHub</a><a href="#">Status <i></i></a></nav></div></footer> : <footer class="site-footer">
       <div class="shell footer-shell">
         <div>
           <p class="footer-mark">airdb</p>
@@ -131,6 +133,6 @@ function isActive(url?: string) {
           )}
         </p>
       </div>
-    </footer>
+    </footer>}
   </body>
 </html>
