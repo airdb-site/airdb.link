@@ -3,7 +3,13 @@ name: Deploy Docs
 permissions:
   contents: write
 
-on: [push]
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy-gh-pages:
