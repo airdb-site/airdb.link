@@ -57,9 +57,11 @@ function isActive(url?: string) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {currentPath === "/404.html" ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={new URL(currentPath, Astro.site).href} />}
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+    <a class="skip-link" href="#main">{htmlLang === "zh-CN" ? "跳至正文" : "Skip to content"}</a>
     <div class="page-orbit page-orbit-left"></div>
     <div class="page-orbit page-orbit-right"></div>
     <header class="site-header">
@@ -75,7 +77,7 @@ function isActive(url?: string) {
               </a>
             ))}
           </nav>
-          {homeMode ? <a class="console-link" href="#resolver">{htmlLang === "zh-CN" ? "控制台" : "Console"} →</a> : languageOptions.length > 0 && (
+          {homeMode ? <a class="console-link" href="#resolver">{htmlLang === "zh-CN" ? "演示" : "Demo"} →</a> : languageOptions.length > 0 && (
             <div class="language-switch" aria-label="Language switcher">
               {languageOptions.map((item, index) => (
                 <>
@@ -91,7 +93,7 @@ function isActive(url?: string) {
       </div>
     </header>
 
-    <main class:list={["shell", homeMode && "product-main", sidebarNav.length > 0 && "with-sidebar"]}>
+    <main id="main" class:list={["shell", homeMode && "product-main", sidebarNav.length > 0 && "with-sidebar"]}>
       {sidebarNav.length > 0 && (
         <aside class="sidebar">
           <div class="sidebar-panel">
@@ -112,7 +114,7 @@ function isActive(url?: string) {
       </div>
     </main>
 
-    {homeMode ? <footer class="product-footer"><div class="shell"><div><strong>airdb.link</strong><small>© 2026 airdb.link</small></div><nav><a href="#directory">Product</a><a href="/zh/documentation/">Docs</a><a href="https://github.com/airdb" target="_blank">GitHub</a><a href="#">Status <i></i></a></nav></div></footer> : <footer class="site-footer">
+    {homeMode ? <footer class="product-footer"><div class="shell"><div><strong>airdb.link</strong><small>© 2026 airdb.link</small></div><nav><a href="#directory">Product</a><a href="/zh/documentation/">Docs</a><a href="https://github.com/airdb" target="_blank">GitHub</a><a href="#resolver">Demo status</a></nav></div></footer> : <footer class="site-footer">
       <div class="shell footer-shell">
         <div>
           <p class="footer-mark">airdb</p>

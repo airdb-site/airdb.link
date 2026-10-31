@@ -193,7 +193,7 @@ const allPages = readMarkdownFiles(CONTENT_DIR)
     const routeSegments = normalizeRoute(filePath);
     const routePath = `/${routeSegments.join("/")}/`;
     const processedBody = preprocessShortcodes(parsed.content);
-    const html = marked.parse(processedBody) as string;
+    const html = (marked.parse(processedBody) as string).replaceAll("<pre>", '<pre tabindex="0">');
     const description = String(
       parsed.data.description ??
         cleanText(processedBody).slice(0, 160),

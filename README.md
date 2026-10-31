@@ -1,4 +1,4 @@
-# airdb.net
+# airdb.link
 
 这个仓库现在已经切换为一个基于 Astro 的静态站点，内容仍然主要来自 `content/` 目录里的 Markdown。
 
@@ -32,3 +32,5 @@ pnpm build
 - 兼容站点中少量 Hugo shortcode，例如 `figure`、`youtube`、`code`、`warning`
 - 更新 Netlify 与 Makefile，使部署和本地开发不再依赖 Hugo
 - 采用 `pnpm` 作为默认包管理器
+
+首页为静态交互演示：不会创建短链接、验证所有权或保存审计记录。旧内容路径继续保留。

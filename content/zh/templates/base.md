@@ -125,7 +125,7 @@ The following shows how you can override both the `"main"` and `"title"` block a
 {{ end }}
 {{< /code >}}
 
-[hugolists]: /templates/lists
-[lookup]: /templates/lookup-order/
-[rendering the section]: /templates/section-templates/
-[singletemplate]: /templates/single-page-templates/
+[hugolists]: https://gohugo.io/templates/lists
+[lookup]: https://gohugo.io/templates/lookup-order/
+[rendering the section]: https://gohugo.io/templates/section-templates/
+[singletemplate]: https://gohugo.io/templates/single-page-templates/

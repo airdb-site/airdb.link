@@ -107,7 +107,7 @@
   name = "成果展示"
   weight = 20
   identifier = "showcase"
-  url = "/zh/showcase/"
+  url = "/zh/about/achievement/"
 
 [[global]]
   name = "社区"

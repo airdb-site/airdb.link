@@ -12,6 +12,7 @@ const slug = Astro.params.slug ?? "";
 const page = getPageBySegments(slug.split("/").filter(Boolean));
 if (!page) throw new Error(`Missing page for route: ${slug}`);
 
+const isHome = page.routeSegments.length === 1;
 const menus = getLanguageMenus(page.lang);
 const languageMeta = getLanguageMeta(page.lang);
 const children = getChildren(page);
@@ -21,8 +22,8 @@ const sidebarNav = page.lang === "zh" && page.routePath.startsWith("/zh/about") 
 ---
 
 <BaseLayout
-  title={`${page.isIndex ? "可信的软件链接基础设施" : page.title} | airdb.link`}
-  description={page.isIndex ? "为软件、文档与发布版本创建稳定、可验证、可审计的链接。" : page.description}
+  title={`${isHome ? "可信的软件链接基础设施" : page.title} | airdb.link`}
+  description={isHome ? "为软件、文档与发布版本创建稳定、可验证、可审计的链接。" : page.description}
   globalNav={menus.global}
   sidebarNav={sidebarNav}
   languageOptions={languageOptions}
@@ -34,9 +35,9 @@ const sidebarNav = page.lang === "zh" && page.routePath.startsWith("/zh/about") 
   copyrightLabel={languageMeta.copyrightLabel}
   filingLabel={languageMeta.filingLabel}
   filingUrl={languageMeta.filingUrl}
-  homeMode={page.isIndex}
+  homeMode={isHome}
 >
-  {page.isIndex ? <LinkHome lang={page.lang} /> : (
+  {isHome ? <LinkHome lang={page.lang} /> : (
     <article class="article-shell">
       <header class="article-header">
         <h1>{page.title}</h1>
