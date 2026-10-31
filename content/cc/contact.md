@@ -9,4 +9,4 @@ menu: main
 ---
 
 
-{{< figure src="/images/qrcode_wxkf.png" title="微信扫码，即可联系官方客服" >}}
+Contact us by email: [info@airdb.com](mailto:info@airdb.com).
